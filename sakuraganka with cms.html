@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>医療法人さくら眼科</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sakura:    #E8B4C0;
+      --sakura-lt: #F7DDE4;
+      --sakura-dk: #C47A8A;
+      --ink:       #2A2426;
+      --muted:     #6B5B5E;
+      --bg:        #FDFBFC;
+      --white:     #FFFFFF;
+      --divider:   #EDE0E3;
+      --green:     #4A7C6F;
+      --serif:     'Noto Serif JP', serif;
+      --sans:      'Noto Sans JP', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253,251,252,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--divider);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--sakura-dk); }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--sakura-dk); }
+    .nav-tel {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-tel::before { content: '📞 '; font-size: 0.75rem; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 64px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-text {
+      padding: clamp(3rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--sakura-dk);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--sakura-dk);
+      border-bottom: 2px solid var(--sakura);
+    }
+    .hero-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+      max-width: 420px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all .25s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--sakura-dk);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--ink); }
+
+    .hero-visual {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--sakura-lt) 0%, #F0E8F0 100%);
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      border-radius: 50% 0 50% 0;
+      background: var(--sakura);
+      opacity: 0.35;
+      animation: drift linear infinite;
+    }
+    @keyframes drift {
+      0%   { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.35; }
+      90%  { opacity: 0.25; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .hero-card {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 2.5rem;
+      box-shadow: 0 12px 48px rgba(42,36,38,0.1);
+      width: 280px;
+      z-index: 2;
+    }
+    .hero-card-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .status-row {
+      display: flex; justify-content: space-between;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--divider);
+      font-size: 0.85rem;
+    }
+    .status-row:last-child { border-bottom: none; }
+    .status-row .label { color: var(--muted); font-size: 0.78rem; }
+    .status-row .value { font-weight: 500; }
+    .badge-open {
+      display: inline-block;
+      background: #E8F5E9;
+      color: #2E7D32;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    .badge-closed {
+      display: inline-block;
+      background: #FDECEA;
+      color: #C62828;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 8vw, 8rem);
+    }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--sakura-dk);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 3rem;
+    }
+
+    /* ── NEWS ── */
+    #news { background: var(--white); }
+    .news-list { list-style: none; max-width: 700px; }
+    .news-item {
+      display: flex; gap: 2rem; align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--divider);
+      font-size: 0.88rem;
+    }
+    .news-date { color: var(--muted); font-size: 0.78rem; white-space: nowrap; min-width: 90px; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--divider);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: box-shadow .2s, border-color .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--sakura);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(42,36,38,0.08); border-color: var(--sakura); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+    .service-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+    .service-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      background: var(--sakura-lt);
+      color: var(--sakura-dk);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+    }
+    .service-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.8; }
+
+    /* ── HOURS ── */
+    #hours { background: var(--ink); color: var(--white); }
+    #hours .section-eyebrow { color: var(--sakura); }
+    #hours .section-title { color: var(--white); }
+    .hours-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    th {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--sakura);
+      font-weight: 400;
+    }
+    td:first-child { text-align: left; color: rgba(255,255,255,0.7); }
+    .dot { color: var(--sakura); font-size: 1.1rem; }
+    .dash { color: rgba(255,255,255,0.25); }
+
+    .hours-notes {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+    .hours-notes li {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      padding: 0.4rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .hours-notes li::before { content: '—'; position: absolute; left: 0; color: var(--sakura); }
+
+    .access-block { font-size: 0.9rem; }
+    .access-block h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+    .access-row {
+      display: flex; gap: 1.2rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .access-label { color: var(--sakura); font-size: 0.75rem; min-width: 60px; padding-top: 0.1rem; }
+    .access-value { color: rgba(255,255,255,0.85); font-size: 0.88rem; line-height: 1.7; }
+    .map-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: var(--sakura);
+      font-size: 0.82rem;
+      text-decoration: none;
+      border: 1px solid var(--sakura);
+      padding: 0.6rem 1.4rem;
+      letter-spacing: 0.08em;
+      transition: all .2s;
+    }
+    .map-link:hover { background: var(--sakura); color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1E191B;
+      color: rgba(255,255,255,0.45);
+      padding: 2.5rem clamp(1.5rem, 8vw, 8rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+    }
+    .admin-link {
+      color: rgba(255,255,255,0.2);
+      font-size: 0.7rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color .2s;
+      background: none;
+      border: none;
+      font-family: var(--sans);
+    }
+    .admin-link:hover { color: rgba(255,255,255,0.5); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .nav-links { display: none; }
+      .hours-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .petal { animation: none; }
+    }
+
+    /* ════════════════════════════════════════
+       CMS OVERLAY
+    ════════════════════════════════════════ */
+    #cms-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(30,25,27,0.6);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+    }
+    #cms-overlay.active { display: flex; }
+
+    /* Login panel */
+    #cms-login {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 2.5rem;
+      width: 340px;
+      box-shadow: 0 24px 64px rgba(30,25,27,0.3);
+    }
+    #cms-login h2 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    #cms-login p { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.8rem; }
+    .cms-field { margin-bottom: 1.2rem; }
+    .cms-field label { display: block; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.06em; }
+    .cms-field input {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--divider);
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: var(--bg);
+      transition: border-color .2s;
+    }
+    .cms-field input:focus { outline: none; border-color: var(--sakura-dk); }
+    .cms-error { font-size: 0.78rem; color: #C62828; margin-bottom: 1rem; display: none; }
+    .cms-btn-row { display: flex; gap: 0.8rem; margin-top: 1.6rem; }
+    .cms-btn {
+      flex: 1;
+      padding: 0.75rem;
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      border: none;
+      transition: all .2s;
+    }
+    .cms-btn-submit { background: var(--sakura-dk); color: var(--white); }
+    .cms-btn-submit:hover { background: var(--ink); }
+    .cms-btn-cancel { background: var(--bg); color: var(--muted); border: 1px solid var(--divider); }
+    .cms-btn-cancel:hover { border-color: var(--muted); color: var(--ink); }
+
+    /* Main CMS panel */
+    #cms-panel {
+      display: none;
+      background: var(--white);
+      border-radius: 6px;
+      width: min(860px, 95vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(30,25,27,0.3);
+    }
+    #cms-panel.active { display: block; }
+
+    .cms-header {
+      position: sticky; top: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--divider);
+      padding: 1.2rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 1;
+    }
+    .cms-header-left { display: flex; align-items: center; gap: 0.8rem; }
+    .cms-header h1 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .cms-header-badge {
+      font-size: 0.65rem;
+      background: var(--sakura-lt);
+      color: var(--sakura-dk);
+      padding: 0.15rem 0.6rem;
+      border-radius: 10px;
+      letter-spacing: 0.06em;
+    }
+    .cms-close {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 1.3rem; line-height: 1;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      transition: color .2s, background .2s;
+    }
+    .cms-close:hover { color: var(--ink); background: var(--bg); }
+
+    .cms-body { padding: 2rem; }
+    .cms-section { margin-bottom: 2.5rem; }
+    .cms-section-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      color: var(--sakura-dk);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    /* Status editor */
+    .status-editor {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .status-editor .cms-field { margin-bottom: 0; }
+    .cms-field select {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--divider);
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      color: var(--ink);
+      background: var(--bg);
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .cms-field select:focus { outline: none; border-color: var(--sakura-dk); }
+    .cms-field textarea {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--divider);
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      color: var(--ink);
+      background: var(--bg);
+      resize: vertical;
+      min-height: 80px;
+      transition: border-color .2s;
+    }
+    .cms-field textarea:focus { outline: none; border-color: var(--sakura-dk); }
+
+    /* News editor */
+    .news-editor-list { list-style: none; }
+    .news-editor-item {
+      display: grid;
+      grid-template-columns: 130px 1fr auto;
+      gap: 0.7rem;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--divider);
+    }
+    .news-editor-item input[type="date"],
+    .news-editor-item input[type="text"] {
+      width: 100%;
+      padding: 0.55rem 0.8rem;
+      border: 1px solid var(--divider);
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      color: var(--ink);
+      background: var(--bg);
+      transition: border-color .2s;
+    }
+    .news-editor-item input:focus { outline: none; border-color: var(--sakura-dk); }
+    .news-del-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 1rem; padding: 0.3rem;
+      border-radius: 3px;
+      transition: color .2s, background .2s;
+    }
+    .news-del-btn:hover { color: #C62828; background: #FDECEA; }
+    .news-add-btn {
+      margin-top: 1rem;
+      padding: 0.6rem 1.4rem;
+      background: none;
+      border: 1px dashed var(--sakura);
+      color: var(--sakura-dk);
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all .2s;
+      letter-spacing: 0.04em;
+    }
+    .news-add-btn:hover { background: var(--sakura-lt); }
+
+    /* Save bar */
+    .cms-save-bar {
+      position: sticky; bottom: 0;
+      background: var(--white);
+      border-top: 1px solid var(--divider);
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cms-save-hint { font-size: 0.78rem; color: var(--muted); }
+    .cms-save-btn {
+      padding: 0.75rem 2rem;
+      background: var(--sakura-dk);
+      color: var(--white);
+      border: none;
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .cms-save-btn:hover { background: var(--ink); }
+    .cms-toast {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      background: var(--ink);
+      color: var(--white);
+      padding: 0.8rem 1.6rem;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all .3s;
+      pointer-events: none;
+    }
+    .cms-toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>さくら</span>眼科</a>
+  <ul class="nav-links">
+    <li><a href="#news">お知らせ</a></li>
+    <li><a href="#services">診療内容</a></li>
+    <li><a href="#hours">診療時間</a></li>
+    <li><a href="#access">アクセス</a></li>
+  </ul>
+  <a class="nav-tel" href="tel:0992955911">099-295-5911</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">SAKURA EYE CLINIC &ensp;／&ensp; 開設 2000年</p>
+    <h1 class="hero-title">
+      目の健康を、<br>
+      <em>丁寧に</em>守ります。
+    </h1>
+    <p class="hero-sub">
+      鹿児島市吉野で、地域の皆さまの眼の健康をサポートし続けて25年。<br>
+      白内障・緑内障・網膜疾患から日常の視力管理まで、幅広く対応しています。
+    </p>
+    <a href="#hours" class="btn btn-primary">診療時間を確認する →</a>
+  </div>
+
+  <div class="hero-visual">
+    <div class="petal" style="width:24px;height:24px;left:15%;animation-duration:7s;animation-delay:0s;"></div>
+    <div class="petal" style="width:16px;height:16px;left:35%;animation-duration:9s;animation-delay:2s;"></div>
+    <div class="petal" style="width:20px;height:20px;left:55%;animation-duration:6s;animation-delay:1s;"></div>
+    <div class="petal" style="width:12px;height:12px;left:75%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="petal" style="width:18px;height:18px;left:25%;animation-duration:10s;animation-delay:1.5s;"></div>
+    <div class="petal" style="width:22px;height:22px;left:65%;animation-duration:7.5s;animation-delay:4s;"></div>
+
+    <div class="hero-card">
+      <p class="hero-card-title">本日の診療</p>
+      <div class="status-row">
+        <span class="label">診療状況</span>
+        <span class="value" id="disp-status"><span class="badge-open">受付中</span></span>
+      </div>
+      <div class="status-row">
+        <span class="label">メッセージ</span>
+        <span class="value" id="disp-message" style="font-size:0.8rem;color:var(--muted);">通常どおり診療しています</span>
+      </div>
+      <div class="status-row">
+        <span class="label">休診日</span>
+        <span class="value" style="font-size:0.78rem;color:var(--muted);">日曜・祝祭日・お盆・年末年始</span>
+      </div>
+      <div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--divider);">
+        <p style="font-size:0.7rem;color:var(--muted);margin-bottom:0.3rem;">お電話でのお問い合わせ</p>
+        <a href="tel:0992955911" style="font-size:1.15rem;font-weight:500;color:var(--ink);text-decoration:none;letter-spacing:0.04em;">099-295-5911</a>
+        <p style="font-size:0.72rem;color:var(--muted);margin-top:0.4rem;">〒892-0877 鹿児島市吉野二丁目6-10</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <p class="section-eyebrow">News &amp; Information</p>
+  <h2 class="section-title">お知らせ</h2>
+  <ul class="news-list" id="disp-news">
+    <!-- Rendered by JS -->
+  </ul>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-eyebrow">Medical Services</p>
+  <h2 class="section-title">診療内容</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">👁️</div>
+      <h3 class="service-name">一般眼科</h3>
+      <p class="service-desc">視力低下・充血・眼の痛みなど、眼に関するあらゆる症状の診察・治療を行います。</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <h3 class="service-name">白内障</h3>
+      <p class="service-desc">白内障の診断から手術まで対応しています。見えにくさ・かすみなどの症状は早めにご相談ください。</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚠️</div>
+      <h3 class="service-name">緑内障</h3>
+      <span class="service-tag">失明原因 第1位</span>
+      <p class="service-desc">自覚症状がないまま進行します。一度失った視野は元に戻りません。40歳を過ぎたら定期検査をお勧めします。</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🩺</div>
+      <h3 class="service-name">網膜疾患</h3>
+      <p class="service-desc">糖尿病網膜症・加齢黄斑変性など、網膜に関わる疾患の診断・治療を行います。</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌸</div>
+      <h3 class="service-name">アレルギー・ドライアイ</h3>
+      <p class="service-desc">花粉症による結膜炎やドライアイの診察・点眼薬処方を行っています。</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <h3 class="service-name">定期検診・健診</h3>
+      <p class="service-desc">目の病気は自覚症状が出たときにはすでに進行していることが多いです。年に一度の眼科受診をぜひお続けください。</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS & ACCESS -->
+<section id="hours">
+  <p class="section-eyebrow">Hours &amp; Access</p>
+  <h2 class="section-title">診療時間 ・ アクセス</h2>
+  <div class="hours-layout">
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;">曜日</th>
+            <th>午前<br><small style="font-size:0.68rem;opacity:0.6;">9:30〜12:00</small></th>
+            <th>午後<br><small style="font-size:0.68rem;opacity:0.6;">16:00〜18:00</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>月曜日</td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>火曜日</td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>水曜日</td><td class="dot">●</td><td class="dash">—</td></tr>
+          <tr><td>木曜日</td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>金曜日</td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>土曜日</td><td class="dot">●</td><td class="dash">—</td></tr>
+          <tr><td>日曜日</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </tbody>
+      </table>
+      <ul class="hours-notes">
+        <li>日曜日・祝祭日・お盆・年末年始は休診となります</li>
+        <li>受付は終了30分前まで</li>
+        <li>臨時休診はお知らせでご確認ください</li>
+      </ul>
+    </div>
+
+    <div class="access-block" id="access">
+      <h3>ACCESS</h3>
+      <div class="access-row">
+        <span class="access-label">住所</span>
+        <span class="access-value">〒892-0877<br>鹿児島市吉野二丁目6-10</span>
+      </div>
+      <div class="access-row">
+        <span class="access-label">TEL</span>
+        <span class="access-value"><a href="tel:0992955911" style="color:inherit;">099-295-5911</a></span>
+      </div>
+      <div class="access-row">
+        <span class="access-label">開設</span>
+        <span class="access-value">2000年</span>
+      </div>
+      <a href="https://maps.google.com/maps?q=鹿児島市吉野二丁目6-10" class="map-link" target="_blank" rel="noopener">
+        Google マップで開く →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">医療法人さくら眼科</span>
+  <span>〒892-0877 鹿児島市吉野二丁目6-10 &ensp;TEL: 099-295-5911</span>
+  <span style="display:flex;align-items:center;gap:1.2rem;">
+    <span>© 2000 Sakura Eye Clinic</span>
+    <button class="admin-link" onclick="openCMS()">管理</button>
+  </span>
+</footer>
+
+<!-- ════════════════════════════════════════
+     CMS OVERLAY
+════════════════════════════════════════ -->
+<div id="cms-overlay">
+
+  <!-- Login -->
+  <div id="cms-login">
+    <h2>管理画面ログイン</h2>
+    <p>さくら眼科 スタッフ専用</p>
+    <div class="cms-field">
+      <label>パスワード</label>
+      <input type="password" id="cms-password" placeholder="パスワードを入力" onkeydown="if(event.key==='Enter')cmsLogin()">
+    </div>
+    <div class="cms-error" id="cms-error">パスワードが正しくありません。</div>
+    <div class="cms-btn-row">
+      <button class="cms-btn cms-btn-cancel" onclick="closeCMS()">キャンセル</button>
+      <button class="cms-btn cms-btn-submit" onclick="cmsLogin()">ログイン</button>
+    </div>
+  </div>
+
+  <!-- Main panel -->
+  <div id="cms-panel">
+    <div class="cms-header">
+      <div class="cms-header-left">
+        <h1>さくら眼科 管理画面</h1>
+        <span class="cms-header-badge">STAFF ONLY</span>
+      </div>
+      <button class="cms-close" onclick="closeCMS()" title="閉じる">✕</button>
+    </div>
+
+    <div class="cms-body">
+
+      <!-- 診療状況 -->
+      <div class="cms-section">
+        <p class="cms-section-title">診療状況カード</p>
+        <div class="status-editor">
+          <div class="cms-field">
+            <label>診療状況</label>
+            <select id="edit-status">
+              <option value="open">受付中</option>
+              <option value="closed">休診</option>
+              <option value="soon">まもなく終了</option>
+            </select>
+          </div>
+          <div class="cms-field">
+            <label>メッセージ</label>
+            <input type="text" id="edit-message" placeholder="例：通常どおり診療しています">
+          </div>
+        </div>
+      </div>
+
+      <!-- お知らせ -->
+      <div class="cms-section">
+        <p class="cms-section-title">お知らせ</p>
+        <ul class="news-editor-list" id="news-editor-list"></ul>
+        <button class="news-add-btn" onclick="addNewsItem()">＋ お知らせを追加</button>
+      </div>
+
+    </div>
+
+    <div class="cms-save-bar">
+      <span class="cms-save-hint">変更内容はブラウザに保存されます</span>
+      <button class="cms-save-btn" onclick="saveChanges()">変更を保存する</button>
+    </div>
+  </div>
+</div>
+
+<div class="cms-toast" id="cms-toast">✓ 変更を保存しました</div>
+
+<script>
+  // ── Default data ──
+  const DEFAULTS = {
+    status: 'open',
+    message: '通常どおり診療しています',
+    news: [
+      { date: '2025-04-01', text: '春季の診療時間のお知らせ。通常通り診療いたします。' },
+      { date: '2025-01-06', text: '年末年始休診のお知らせ（12月31日〜1月5日）。' },
+      { date: '2024-08-10', text: 'お盆休診のお知らせ（8月12日〜16日）。' }
+    ]
+  };
+
+  // ── Load from localStorage or defaults ──
+  function loadData() {
+    try {
+      return JSON.parse(localStorage.getItem('sakura_cms')) || DEFAULTS;
+    } catch(e) { return DEFAULTS; }
+  }
+
+  function saveData(d) {
+    localStorage.setItem('sakura_cms', JSON.stringify(d));
+  }
+
+  // ── Render public site ──
+  function renderSite() {
+    const d = loadData();
+
+    // Status card
+    const statusEl = document.getElementById('disp-status');
+    const msgEl    = document.getElementById('disp-message');
+    if (d.status === 'open') {
+      statusEl.innerHTML = '<span class="badge-open">受付中</span>';
+    } else if (d.status === 'soon') {
+      statusEl.innerHTML = '<span class="badge-open" style="background:#FFF8E1;color:#F57F17;">まもなく終了</span>';
+    } else {
+      statusEl.innerHTML = '<span class="badge-closed">休診</span>';
+    }
+    msgEl.textContent = d.message;
+
+    // News
+    const newsList = document.getElementById('disp-news');
+    newsList.innerHTML = '';
+    d.news.forEach(item => {
+      const li = document.createElement('li');
+      li.className = 'news-item';
+      const dateStr = item.date.replace(/-/g, '.').replace(/^(\d{4})\.(\d{2})\.(\d{2})$/, '$1.$2.$3');
+      li.innerHTML = `<span class="news-date">${dateStr}</span><span>${item.text}</span>`;
+      newsList.appendChild(li);
+    });
+  }
+
+  // ── CMS open/close ──
+  const CMS_PASSWORD = 'sakura2000';
+
+  function openCMS() {
+    document.getElementById('cms-overlay').classList.add('active');
+    document.getElementById('cms-login').style.display  = 'block';
+    document.getElementById('cms-panel').classList.remove('active');
+    document.getElementById('cms-password').value = '';
+    document.getElementById('cms-error').style.display = 'none';
+    setTimeout(() => document.getElementById('cms-password').focus(), 50);
+  }
+
+  function closeCMS() {
+    document.getElementById('cms-overlay').classList.remove('active');
+  }
+
+  function cmsLogin() {
+    const pw = document.getElementById('cms-password').value;
+    if (pw === CMS_PASSWORD) {
+      document.getElementById('cms-login').style.display = 'none';
+      document.getElementById('cms-panel').classList.add('active');
+      populateEditor();
+    } else {
+      document.getElementById('cms-error').style.display = 'block';
+      document.getElementById('cms-password').value = '';
+      document.getElementById('cms-password').focus();
+    }
+  }
+
+  // ── Populate editor with current data ──
+  function populateEditor() {
+    const d = loadData();
+    document.getElementById('edit-status').value  = d.status;
+    document.getElementById('edit-message').value = d.message;
+    renderNewsEditor(d.news);
+  }
+
+  function renderNewsEditor(newsList) {
+    const ul = document.getElementById('news-editor-list');
+    ul.innerHTML = '';
+    newsList.forEach((item, i) => {
+      const li = document.createElement('li');
+      li.className = 'news-editor-item';
+      li.innerHTML = `
+        <input type="date" value="${item.date}" onchange="updateNewsDate(${i}, this.value)">
+        <input type="text" value="${item.text}" placeholder="お知らせ内容" oninput="updateNewsText(${i}, this.value)">
+        <button class="news-del-btn" onclick="deleteNewsItem(${i})" title="削除">🗑</button>
+      `;
+      ul.appendChild(li);
+    });
+  }
+
+  function updateNewsDate(i, val) {
+    const d = loadData(); d.news[i].date = val; saveData(d);
+  }
+  function updateNewsText(i, val) {
+    const d = loadData(); d.news[i].text = val; saveData(d);
+  }
+  function deleteNewsItem(i) {
+    const d = loadData(); d.news.splice(i,1); saveData(d); renderNewsEditor(d.news);
+  }
+  function addNewsItem() {
+    const today = new Date().toISOString().slice(0,10);
+    const d = loadData();
+    d.news.unshift({ date: today, text: '' });
+    saveData(d);
+    renderNewsEditor(d.news);
+    // Focus the new text input
+    setTimeout(() => {
+      const inputs = document.querySelectorAll('#news-editor-list .news-editor-item input[type="text"]');
+      if (inputs[0]) inputs[0].focus();
+    }, 50);
+  }
+
+  // ── Save ──
+  function saveChanges() {
+    const d = loadData();
+    d.status  = document.getElementById('edit-status').value;
+    d.message = document.getElementById('edit-message').value;
+    saveData(d);
+    renderSite();
+    showToast();
+  }
+
+  function showToast() {
+    const t = document.getElementById('cms-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // Close overlay when clicking backdrop
+  document.getElementById('cms-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeCMS();
+  });
+
+  // ── Init ──
+  renderSite();
+</script>
+
+</body>
+</html>
