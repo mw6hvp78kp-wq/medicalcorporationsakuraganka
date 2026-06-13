@@ -1,2 +1,1 @@
-# medicalcorporationsakuraganka.html
-
+# medicalcorporationsakuraganka
