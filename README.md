@@ -1,1 +1,2 @@
 # medicalcorporationsakuraganka
+#index.html
